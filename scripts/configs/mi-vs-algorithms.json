@@ -1,0 +1,80 @@
+{
+    "name": "mi-vs-algorithms",
+    "data_model": {
+        "name": "glauber",
+        "length": 100,
+        "coupling": [
+            0.0,
+            0.010526315789473684,
+            0.021052631578947368,
+            0.031578947368421054,
+            0.042105263157894736,
+            0.05263157894736842,
+            0.06315789473684211,
+            0.07368421052631578,
+            0.08421052631578947,
+            0.09473684210526316,
+            0.10526315789473684,
+            0.11578947368421053,
+            0.12631578947368421,
+            0.1368421052631579,
+            0.14736842105263157,
+            0.15789473684210525,
+            0.16842105263157894,
+            0.17894736842105263,
+            0.18947368421052632,
+            0.2,
+            0.2666666666666667,
+            0.33333333333333337,
+            0.4,
+            0.46666666666666673,
+            0.5333333333333334,
+            0.6000000000000001,
+            0.6666666666666667,
+            0.7333333333333334,
+            0.8
+        ],
+        "auto_activation_prob": 0,
+        "auto_deactivation_prob": 0,
+        "n_active": -1
+    },
+    "target": "None",
+    "prior": {
+        "name": "erdosrenyi",
+        "size": 100,
+        "likelihood_type": "uniform",
+        "edge_count": 250,
+        "canonical": false,
+        "loopy": false,
+        "multigraph": false,
+        "edge_proposer_type": "uniform"
+    },
+    "metrics": {
+        "name": "metrics",
+        "pred_error": {
+            "name": "pred_error",
+            "predictor": [
+                "average_probability",
+                "logistic",
+                "mlp"
+            ],
+            "n_train_samples": 100,
+            "n_samples": 64,
+            "measures": "absolute_error"
+        },
+        "recon_error": {
+            "name": "recon_error",
+            "reconstructor": [
+                "correlation",
+                "grander_causality",
+                "transfer_entropy"
+            ],
+            "n_samples": 64,
+            "measures": "roc"
+        }
+    },
+    "path": "data/mi-vs-algorithm",
+    "n_workers": 24,
+    "n_async_jobs": 1,
+    "seed": null
+}

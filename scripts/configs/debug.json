@@ -1,0 +1,45 @@
+{
+    "name": "debug",
+    "data_model": {
+        "name": "glauber",
+        "length": 10,
+        "coupling": [
+            0.2
+        ],
+        "auto_activation_prob": 0,
+        "auto_deactivation_prob": 0,
+        "n_active": -1
+    },
+    "target": "None",
+    "prior": {
+        "name": "erdosrenyi",
+        "size": 5,
+        "likelihood_type": "uniform",
+        "edge_count": 5,
+        "canonical": false,
+        "loopy": false,
+        "multigraph": false,
+        "edge_proposer_type": "uniform"
+    },
+    "metrics": {
+        "name": "metrics",
+        "bayesian": {
+            "name": "bayesian",
+            "graph_mcmc": {
+                "name": "exact",
+                "method": "exact"
+            },
+            "data_mcmc": {
+                "name": "exact",
+                "method": "exact"
+            },
+            "reduction": "normal",
+            "n_samples": 10,
+            "resample_graph": false
+        }
+    },
+    "path": "data/debug",
+    "n_workers": 24,
+    "n_async_jobs": 1,
+    "seed": null
+}

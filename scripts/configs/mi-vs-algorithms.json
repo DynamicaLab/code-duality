@@ -36,22 +36,43 @@
         ],
         "auto_activation_prob": 0,
         "auto_deactivation_prob": 0,
-        "n_active": -1
+        "n_active": -1,
+        "prior": {
+            "name": "erdosrenyi",
+            "size": 100,
+            "likelihood_type": "uniform",
+            "edge_count": 250,
+            "canonical": false,
+            "loopy": false,
+            "multigraph": false,
+            "edge_proposer_type": "uniform"
+        }
     },
     "target": "None",
-    "prior": {
-        "name": "erdosrenyi",
-        "size": 100,
-        "likelihood_type": "uniform",
-        "edge_count": 250,
-        "canonical": false,
-        "loopy": false,
-        "multigraph": false,
-        "edge_proposer_type": "uniform"
-    },
-    "metrics": {
-        "name": "metrics",
-        "pred_error": {
+    "metrics": [
+        {
+            "name": "bayesian",
+            "graph_mcmc": {
+                "name": "exact",
+                "method": "exact"
+            },
+            "data_mcmc": {
+                "name": "meanfield",
+                "method": "meanfield",
+                "n_sweeps": 500,
+                "n_gibbs_sweeps": 2,
+                "n_steps_per_vertex": 5,
+                "burn_sweeps": 10,
+                "sample_prior": false,
+                "sample_params": false,
+                "start_from_original": false,
+                "reset_original": true
+            },
+            "reduction": "normal",
+            "n_samples": 10,
+            "resample_graph": false
+        },
+        {
             "name": "pred_error",
             "predictor": [
                 "average_probability",
@@ -62,7 +83,7 @@
             "n_samples": 64,
             "measures": "absolute_error"
         },
-        "recon_error": {
+        {
             "name": "recon_error",
             "reconstructor": [
                 "correlation",
@@ -72,7 +93,7 @@
             "n_samples": 64,
             "measures": "roc"
         }
-    },
+    ],
     "path": "data/mi-vs-algorithm",
     "n_workers": 24,
     "n_async_jobs": 1,

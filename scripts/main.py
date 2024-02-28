@@ -11,15 +11,14 @@ from code_duality.metrics import Progress, MemoryCheck, Checkpoint
 configs = {
     "debug": "configs/debug.json",
     "mi-vs-algorithms": "configs/mi-vs-algorithms.json",
+    "timestep-duality": "configs/timestep-duality.json",
+    "coupling-duality-top": "configs/coupling-duality-top.json",
+    "coupling-duality-bottom": "configs/coupling-duality-bottom.json",
 }
 
 
 def main(metaconfig: Config, resume: bool = True, save_patience: int = 1):
-    metrics = {
-        m: MetricsFactory.build(metaconfig.metrics.get(m))
-        for m in metaconfig.metrics.keys()
-        if m in MetricsFactory.options()
-    }
+    metrics = {m: MetricsFactory.build(m) for m in metaconfig.metrics if m.name in MetricsFactory.options()}
     logger = logging.getLogger()
     logger.setLevel(logging.DEBUG)
     handler = logging.StreamHandler(sys.stdout)

@@ -45,7 +45,7 @@ class PastDependentInformationMeasures(Expectation):
     def func(self, seed: int) -> float:
         gi_seed(seed)
         config = Config.from_dict(self.params)
-        prior = GraphFactory.build(config.prior)
+        prior = GraphFactory.build(config.data_model.prior)
         data_model = DataModelFactory.build(config.data_model)
 
         data_model.set_prior(prior)

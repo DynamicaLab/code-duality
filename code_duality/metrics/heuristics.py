@@ -288,7 +288,7 @@ class BayesianReconstructor(Reconstructor):
     """
 
     def __init__(self, config: Config):
-        self.graph = GraphFactory.build(config.prior)
+        self.graph = GraphFactory.build(config.data_model.prior)
         self.model = DataModelFactory.build(config.data_model)
         self.model.set_prior(self.graph)
         self.__results__ = dict()
@@ -328,8 +328,8 @@ class PeixotoReconstructor(BayesianReconstructor):
 
     def __init__(self, config: Config):
         prior = GraphConfig.degree_corrected_stochastic_block_model(
-            size=config.prior.size,
-            edge_count=config.prior.edge_count,
+            size=config.data_model.prior.size,
+            edge_count=config.data_model.prior.edge_count,
             degree_prior_type="hyper",
         )
         self.graph = GraphFactory.build(prior)
@@ -419,7 +419,7 @@ def prepare_training_data(config: Config, n_train_samples: int = 100):
     inputs = []
     targets = []
 
-    prior = GraphFactory.build(config.prior)
+    prior = GraphFactory.build(config.data_model.prior)
     model = DataModelFactory.build(config.data_model)
     model.set_prior(prior)
 
@@ -442,7 +442,7 @@ class AverageProbabilityPredictor(Predictor):
     def __init__(self, config: Config):
         self.config = config
         super().__init__()
-        self.prior = GraphFactory.build(config.prior)
+        self.prior = GraphFactory.build(config.data_model.prior)
         self.model = DataModelFactory.build(config.data_model)
         self.model.set_prior(self.prior)
 

@@ -26,6 +26,7 @@ class DataModelConfig(Config):
     ):
         return cls(
             name="glauber",
+            prior=None,
             length=length,
             coupling=coupling,
             auto_activation_prob=auto_activation_prob,
@@ -45,6 +46,7 @@ class DataModelConfig(Config):
     ):
         return cls(
             name="sis",
+            prior=None,
             length=length,
             infection_prob=infection_prob,
             recovery_prob=recovery_prob,
@@ -67,6 +69,7 @@ class DataModelConfig(Config):
     ):
         return cls(
             name="cowan",
+            prior=None,
             length=length,
             nu=nu,
             a=a,
@@ -100,6 +103,7 @@ class DataModelConfig(Config):
     ):
         return cls(
             name="degree",
+            prior=None,
             length=length,
             C=C,
             auto_activation_prob=auto_activation_prob,
@@ -115,6 +119,7 @@ class DataModelConfig(Config):
     ):
         return cls(
             name="poisson_graph",
+            prior=None,
             mu=mu,
             mu_no_edge=mu_no_edge,
         )

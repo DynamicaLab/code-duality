@@ -111,7 +111,17 @@
             ],
             "auto_activation_prob": 0,
             "auto_deactivation_prob": 0,
-            "n_active": -1
+            "n_active": -1,
+            "prior": {
+                "name": "erdosrenyi",
+                "size": 100,
+                "likelihood_type": "uniform",
+                "edge_count": 250,
+                "canonical": false,
+                "loopy": false,
+                "multigraph": false,
+                "edge_proposer_type": "uniform"
+            }
         },
         {
             "name": "sis",
@@ -224,7 +234,17 @@
             "recovery_prob": 0.1,
             "auto_activation_prob": 1e-4,
             "auto_deactivation_prob": 0,
-            "n_active": -1
+            "n_active": -1,
+            "prior": {
+                "name": "erdosrenyi",
+                "size": 100,
+                "likelihood_type": "uniform",
+                "edge_count": 250,
+                "canonical": false,
+                "loopy": false,
+                "multigraph": false,
+                "edge_proposer_type": "uniform"
+            }
         },
         {
             "name": "cowan",
@@ -337,23 +357,23 @@
             "eta": 0.1,
             "auto_activation_prob": 0,
             "auto_deactivation_prob": 0,
-            "n_active": -1
+            "n_active": -1,
+            "prior": {
+                "name": "erdosrenyi",
+                "size": 100,
+                "likelihood_type": "uniform",
+                "edge_count": 250,
+                "canonical": false,
+                "loopy": false,
+                "multigraph": false,
+                "edge_proposer_type": "uniform"
+            }
         }
     ],
     "target": "None",
-    "prior": {
-        "name": "erdosrenyi",
-        "size": 100,
-        "likelihood_type": "uniform",
-        "edge_count": 250,
-        "canonical": false,
-        "loopy": false,
-        "multigraph": false,
-        "edge_proposer_type": "uniform"
-    },
-    "metrics": {
-        "name": "metrics",
-        "bayesian": {
+    "metrics": [
+        {
+            "name": "bayesian",
             "graph_mcmc": {
                 "name": "exact",
                 "method": "exact"
@@ -366,7 +386,8 @@
             "n_samples": 10,
             "resample_graph": false
         },
-        "pastinfo": {
+        {
+            "name": "pastinfo",
             "graph_mcmc": {
                 "name": "exact",
                 "method": "exact"
@@ -380,7 +401,7 @@
             "past_length": 0.5,
             "resample_graph": false
         }
-    },
+    ],
     "path": "data/timestep-duality",
     "n_workers": 24,
     "n_async_jobs": 1,

@@ -70,7 +70,7 @@ class Susceptibility(Expectation):
     def setup(self, seed: int) -> Any:
         gi_seed(seed)
         config = Config.from_dict(self.params)
-        prior = GraphFactory.build(config.prior)
+        prior = GraphFactory.build(config.data_model.prior)
         model = DataModelFactory.build(config.data_model)
 
         model.set_graph_prior(prior)

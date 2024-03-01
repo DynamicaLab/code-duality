@@ -8,14 +8,6 @@ from code_duality.config import Config
 from code_duality.factories import MetricsFactory
 from code_duality.metrics import Progress, MemoryCheck, Checkpoint
 
-configs = {
-    "debug": "configs/debug.json",
-    "mi-vs-algorithms": "configs/mi-vs-algorithms.json",
-    "timestep-duality": "configs/timestep-duality.json",
-    "coupling-duality-top": "configs/coupling-duality-top.json",
-    "coupling-duality-bottom": "configs/coupling-duality-bottom.json",
-}
-
 
 def main(metaconfig: Config, resume: bool = True, save_patience: int = 1):
     metrics = {m: MetricsFactory.build(m) for m in metaconfig.metrics if m.name in MetricsFactory.options()}
@@ -28,7 +20,7 @@ def main(metaconfig: Config, resume: bool = True, save_patience: int = 1):
     logger.addHandler(handler)
 
     if metaconfig.path is None:
-        metaconfig.path = "./"
+        metaconfig.path = "./data"
     logger.info("Output path: " + metaconfig.path)
     if not os.path.exists(metaconfig.path):
         os.makedirs(metaconfig.path)
@@ -61,6 +53,7 @@ def main(metaconfig: Config, resume: bool = True, save_patience: int = 1):
 
     end = dt.datetime.now()
     logger.info(f"Total computation time: {end - begin}")
+    metaconfig.save(metaconfig.path + "/config.json")
 
 
 if __name__ == "__main__":
@@ -69,7 +62,7 @@ if __name__ == "__main__":
     parser.add_argument(
         "--config",
         type=str,
-        help="The configuration name or file.",
+        help="Path to the configuration file.",
     )
     parser.add_argument(
         "--n-workers",
@@ -104,11 +97,7 @@ if __name__ == "__main__":
     args = parser.parse_args()
 
     # Preparing the config
-    if args.config in configs:
-        config = Config.load(configs[args.config]).unlock()
-    else:
-        assert os.path.exists(args.config), f"Config file {args.config} not found."
-        config = Config.load(args.config).unlock()
+    config = Config.load(args.config).unlock()
     config.n_workers = args.n_workers
     config.n_async_jobs = args.n_async_jobs
     config.path = args.output_path

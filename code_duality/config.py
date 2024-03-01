@@ -154,29 +154,6 @@ class Config:
         self._type_lock = False
         return self
 
-    # @staticmethod
-    # def from_dict(data):
-    #     """Convert a dict to a Config object.
-    #     `data` can be nested (dict within dict), which will generate sub configs.
-    #     If `data` is not a dict, then the method returns `data`.
-
-    #     Example:
-    #     -------------
-    #     d = {"a": {"b": 4}}
-    #     config = Config.from_dict(d)
-    #     assert config.a.b == 4
-    #     """
-    #     if isinstance(data, dict) == False:
-    #         return data
-    #     config = Config()
-    #     for key in data:
-    #         if isinstance(data[key], dict):
-    #             config[key] = Config.from_dict(data[key])
-    #         else:
-    #             config[key] = data[key]
-
-    #     return config
-
     @staticmethod
     def _convert_json_res(res: dict):
         """Convert the download config, meta into a Config."""
@@ -191,17 +168,6 @@ class Config:
 
         config = Config.from_dict(res.get("__config__", {}))
         return config, meta
-
-    # @property
-    # def dict(self):
-    #     """A property that converts a config to a dict. Supports nested Config."""
-    #     d = {}
-    #     for key, item in self._state.items():
-    #         if isinstance(item, Config):
-    #             d[key] = item.dict
-    #         else:
-    #             d[key] = item
-    #     return d
 
     def keys(self):
         """Return the keys of the config."""
@@ -218,6 +184,13 @@ class Config:
     def get(self, name, default: Optional[Any] = None):
         """Return the value of the parameter."""
         return self._state.get(name, default)
+
+    def pop(self, name, default: Optional[Any] = None):
+        """Pop the value of the parameter."""
+        val = self._state.pop(name, default)
+        self = Config(**self._state)
+        # self.__types__.pop(name, None)
+        return val
 
     def type(self, name: str) -> Type:
         """Return the type of the parameter."""

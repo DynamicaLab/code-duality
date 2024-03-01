@@ -18,6 +18,7 @@ class DataModelConfig(Config):
     @classmethod
     def glauber(
         cls,
+        prior: Optional[Config] = None,
         length: int = 100,
         coupling: float = 1.0,
         auto_activation_prob=0,
@@ -26,7 +27,7 @@ class DataModelConfig(Config):
     ):
         return cls(
             name="glauber",
-            prior=None,
+            prior=prior,
             length=length,
             coupling=coupling,
             auto_activation_prob=auto_activation_prob,
@@ -37,6 +38,7 @@ class DataModelConfig(Config):
     @classmethod
     def sis(
         cls,
+        prior: Optional[Config] = None,
         length: int = 100,
         infection_prob: float = 0.1,
         recovery_prob: float = 0.1,
@@ -46,7 +48,7 @@ class DataModelConfig(Config):
     ):
         return cls(
             name="sis",
-            prior=None,
+            prior=prior,
             length=length,
             infection_prob=infection_prob,
             recovery_prob=recovery_prob,
@@ -58,6 +60,7 @@ class DataModelConfig(Config):
     @classmethod
     def cowan(
         cls,
+        prior: Optional[Config] = None,
         length: int = 100,
         nu: float = 1.0,
         a: float = 8.0,
@@ -69,7 +72,7 @@ class DataModelConfig(Config):
     ):
         return cls(
             name="cowan",
-            prior=None,
+            prior=prior,
             length=length,
             nu=nu,
             a=a,
@@ -91,38 +94,6 @@ class DataModelConfig(Config):
         cfg = cls.cowan(**kwargs)
         cfg.n_active = -1
         return cfg
-
-    @classmethod
-    def degree(
-        cls,
-        length: int = 100,
-        C: float = 1.0,
-        auto_activation_prob=0,
-        auto_deactivation_prob=0,
-        n_active: int = 2**31 - 1,
-    ):
-        return cls(
-            name="degree",
-            prior=None,
-            length=length,
-            C=C,
-            auto_activation_prob=auto_activation_prob,
-            auto_deactivation_prob=auto_deactivation_prob,
-            n_active=n_active,
-        )
-
-    @classmethod
-    def poisson_graph(
-        cls,
-        mu: float = 5,
-        mu_no_edge: float = 0,
-    ):
-        return cls(
-            name="poisson_graph",
-            prior=None,
-            mu=mu,
-            mu_no_edge=mu_no_edge,
-        )
 
 
 class DataModelFactory(Factory):

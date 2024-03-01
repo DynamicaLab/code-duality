@@ -27,6 +27,12 @@ def main(metaconfig: Config, resume: bool = True, save_patience: int = 1):
     handler.setFormatter(formatter)
     logger.addHandler(handler)
 
+    if metaconfig.path is None:
+        metaconfig.path = "./"
+    logger.info("Output path: " + metaconfig.path)
+    if not os.path.exists(metaconfig.path):
+        os.makedirs(metaconfig.path)
+
     begin = dt.datetime.now()
 
     for k, m in metrics.items():

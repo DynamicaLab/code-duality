@@ -1,7 +1,7 @@
 # code-duality
 Code for the paper *Duality between predictability and recontructability in complex systems*
 
-[![DOI](https://zenodo.org/badge/10779392.svg)](https://zenodo.org/badge/latestdoi/10779392)
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.10779392.svg)](https://doi.org/10.5281/zenodo.10779392)
 
 ## Requirements and dependencies
 
